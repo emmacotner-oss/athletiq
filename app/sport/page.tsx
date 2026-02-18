@@ -1,45 +1,19 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { usePlan } from '../context/PlanContext';
-import { Sport } from '../types';
-import BackButton from '../components/BackButton';
-import ProgressBar from '../components/ProgressBar';
-
-const sports: Sport[] = [
-  'Basketball',
-  'Soccer',
-  'Tennis',
-  'Swimming',
-  'Running',
-  'Football',
-  'Baseball',
-  'Volleyball',
-  'Golf',
-  'Boxing',
-  'MMA',
-  'Hockey',
-  'Track & Field',
-  'Rugby',
-  'Cricket',
-  'Other',
-];
+import { Sport, SPORTS_WITH_ICONS } from '../types';
 
 export default function SportPage() {
   const router = useRouter();
   const { sport, setSport, customSport, setCustomSport } = usePlan();
   const [selectedSport, setSelectedSport] = useState<Sport | null>(sport);
   const [customInput, setCustomInput] = useState(customSport);
-  const [showCustomInput, setShowCustomInput] = useState(sport === 'Other');
 
   const handleSportSelect = (s: Sport) => {
     setSelectedSport(s);
-    if (s === 'Other') {
-      setShowCustomInput(true);
-    } else {
-      setShowCustomInput(false);
+    if (s !== 'Other') {
       setCustomInput('');
     }
   };
@@ -57,70 +31,97 @@ export default function SportPage() {
   const canContinue = selectedSport && (selectedSport !== 'Other' || customInput.trim().length > 0);
 
   return (
-    <div className="min-h-screen p-4 py-8 md:py-12 max-w-5xl mx-auto">
-      <BackButton />
-      <ProgressBar step={1} />
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+    <div style={{ maxWidth: 700, margin: '0 auto', padding: '32px 24px' }}>
+      <button
+        onClick={() => router.push('/')}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: 'rgba(255,255,255,0.35)',
+          cursor: 'pointer',
+          fontSize: 13,
+          marginBottom: 20,
+          fontWeight: 600,
+        }}
       >
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12">What sport do you play?</h1>
+        ← Back
+      </button>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-8">
-          {sports.map((s, index) => (
-            <motion.button
-              key={s}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ 
-                delay: index * 0.03,
-                type: 'spring',
-                stiffness: 300,
-                damping: 20
-              }}
-              onClick={() => handleSportSelect(s)}
-              className={`card-glass p-4 md:p-6 rounded-xl text-center font-semibold text-sm md:text-base ${
-                selectedSport === s ? 'card-selected' : ''
-              }`}
-            >
-              {s}
-            </motion.button>
-          ))}
-        </div>
+      <h2 style={{ fontSize: 30, fontWeight: 800, marginBottom: 6, letterSpacing: '-0.5px' }}>
+        What sport do you play?
+      </h2>
+      <p style={{ color: 'rgba(255,255,255,0.4)', marginBottom: 28, fontSize: 15 }}>
+        Select your primary sport to get started.
+      </p>
 
-        {showCustomInput && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            className="mb-8"
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8 }}>
+        {SPORTS_WITH_ICONS.map((s) => (
+          <button
+            key={s.name}
+            onClick={() => handleSportSelect(s.name)}
+            style={{
+              padding: '16px 8px',
+              borderRadius: 12,
+              cursor: 'pointer',
+              border: selectedSport === s.name ? '2px solid #6c63ff' : '2px solid rgba(255,255,255,0.08)',
+              background: selectedSport === s.name ? 'rgba(108,99,255,0.15)' : 'rgba(255,255,255,0.03)',
+              color: selectedSport === s.name ? '#fff' : 'rgba(255,255,255,0.6)',
+              fontSize: 14,
+              fontWeight: 600,
+              transition: 'all 0.25s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 6,
+            }}
           >
-            <input
-              type="text"
-              value={customInput}
-              onChange={(e) => setCustomInput(e.target.value)}
-              placeholder="Enter your sport..."
-              className="w-full p-4 rounded-xl bg-white/5 border border-white/10 focus:border-primary-purple focus:outline-none transition-colors"
-            />
-          </motion.div>
-        )}
+            <span style={{ fontSize: 24 }}>{s.icon}</span>
+            <span style={{ fontSize: 12 }}>{s.name}</span>
+          </button>
+        ))}
+      </div>
 
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ delay: 0.3 }}
-          onClick={handleContinue}
-          disabled={!canContinue}
-          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg inline-block"
-        >
-          Continue →
-        </motion.button>
-      </motion.div>
+      {selectedSport === 'Other' && (
+        <input
+          value={customInput}
+          onChange={(e) => setCustomInput(e.target.value)}
+          placeholder="Enter your sport..."
+          onFocus={(e) => e.currentTarget.style.borderColor = '#6c63ff'}
+          onBlur={(e) => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'}
+          style={{
+            width: '100%',
+            marginTop: 12,
+            padding: '14px 16px',
+            borderRadius: 12,
+            border: '2px solid rgba(255,255,255,0.1)',
+            background: 'rgba(255,255,255,0.04)',
+            color: '#fff',
+            fontSize: 15,
+            outline: 'none',
+            boxSizing: 'border-box',
+          }}
+        />
+      )}
+
+      <button
+        onClick={handleContinue}
+        disabled={!canContinue}
+        style={{
+          marginTop: 28,
+          width: '100%',
+          padding: '15px',
+          fontSize: 15,
+          fontWeight: 700,
+          border: 'none',
+          borderRadius: 14,
+          background: canContinue ? 'linear-gradient(135deg, #6c63ff, #3b82f6)' : 'rgba(255,255,255,0.06)',
+          color: canContinue ? '#fff' : 'rgba(255,255,255,0.2)',
+          cursor: canContinue ? 'pointer' : 'default',
+          transition: 'all 0.25s',
+        }}
+      >
+        Continue →
+      </button>
     </div>
   );
 }

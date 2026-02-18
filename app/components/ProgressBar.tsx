@@ -1,37 +1,42 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 interface ProgressBarProps {
   step: number;
 }
 
 export default function ProgressBar({ step }: ProgressBarProps) {
   return (
-    <div className="flex gap-2 mb-6 md:mb-8">
-      {[1, 2, 3].map((s) => (
-        <motion.div
-          key={s}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ 
-            duration: 0.5,
-            delay: s * 0.1,
-            ease: [0.4, 0, 0.2, 1]
-          }}
-          style={{ transformOrigin: 'left' }}
-          className="h-1 flex-1 rounded-full overflow-hidden bg-white/10"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: s <= step ? '100%' : '0%' }}
-            transition={{ 
-              duration: 0.4,
-              ease: [0.4, 0, 0.2, 1]
-            }}
-            className="h-full bg-gradient-to-r from-primary-purple to-primary-blue"
-          />
-        </motion.div>
+    <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+      {[1, 2, 3].map(i => (
+        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{
+            width: 28,
+            height: 28,
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 12,
+            fontWeight: 700,
+            background: i < step 
+              ? 'linear-gradient(135deg, #6c63ff, #3b82f6)' 
+              : i === step 
+                ? 'rgba(108,99,255,0.2)' 
+                : 'rgba(255,255,255,0.06)',
+            color: i <= step ? '#fff' : 'rgba(255,255,255,0.3)',
+            border: i === step ? '2px solid #6c63ff' : '2px solid transparent',
+          }}>
+            {i < step ? '✓' : i}
+          </div>
+          {i < 3 && (
+            <div style={{
+              width: 24,
+              height: 2,
+              background: i < step ? '#6c63ff' : 'rgba(255,255,255,0.08)',
+              borderRadius: 1,
+            }} />
+          )}
+        </div>
       ))}
     </div>
   );

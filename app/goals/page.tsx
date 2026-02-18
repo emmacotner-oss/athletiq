@@ -1,12 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { usePlan } from '../context/PlanContext';
 import { SPORT_GOALS } from '../types';
-import BackButton from '../components/BackButton';
-import ProgressBar from '../components/ProgressBar';
 
 export default function GoalsPage() {
   const router = useRouter();
@@ -38,64 +35,101 @@ export default function GoalsPage() {
 
   if (!sport) return null;
 
+  const displaySport = sport === 'Other' ? customSport : sport;
+
   return (
-    <div className="min-h-screen p-4 py-8 md:py-12 max-w-5xl mx-auto">
-      <BackButton />
-      <ProgressBar step={2} />
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+    <div style={{ maxWidth: 700, margin: '0 auto', padding: '32px 24px' }}>
+      <button
+        onClick={() => router.push('/sport')}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: 'rgba(255,255,255,0.35)',
+          cursor: 'pointer',
+          fontSize: 13,
+          marginBottom: 20,
+          fontWeight: 600,
+        }}
       >
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">What do you want to improve?</h1>
-        <p className="text-white/55 mb-6 md:mb-8 text-sm md:text-base">Pick up to 3 focus areas</p>
+        ← Back
+      </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-8">
-          {availableGoals.map((goal, index) => (
-            <motion.button
+      <h2 style={{ fontSize: 30, fontWeight: 800, marginBottom: 6, letterSpacing: '-0.5px' }}>
+        What do you want to improve?
+      </h2>
+      <p style={{ color: 'rgba(255,255,255,0.4)', marginBottom: 28, fontSize: 15 }}>
+        Pick up to 3 focus areas for your <span style={{ color: '#6c63ff', fontWeight: 600 }}>{displaySport}</span> training.
+      </p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {availableGoals.map((goal) => {
+          const isSelected = selectedGoals.includes(goal);
+          const isDisabled = !isSelected && selectedGoals.length >= 3;
+
+          return (
+            <button
               key={goal}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: selectedGoals.includes(goal) || selectedGoals.length < 3 ? 1.03 : 1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ 
-                delay: index * 0.03,
-                type: 'spring',
-                stiffness: 300,
-                damping: 20
-              }}
               onClick={() => handleGoalToggle(goal)}
-              disabled={!selectedGoals.includes(goal) && selectedGoals.length >= 3}
-              className={`card-glass p-4 rounded-xl text-left font-semibold text-sm md:text-base ${
-                selectedGoals.includes(goal) ? 'card-selected' : ''
-              } ${
-                !selectedGoals.includes(goal) && selectedGoals.length >= 3 ? 'opacity-30 cursor-not-allowed' : ''
-              }`}
+              disabled={isDisabled}
+              style={{
+                padding: '14px 20px',
+                borderRadius: 12,
+                cursor: isDisabled ? 'default' : 'pointer',
+                border: isSelected ? '2px solid #6c63ff' : '2px solid rgba(255,255,255,0.08)',
+                background: isSelected ? 'rgba(108,99,255,0.15)' : 'rgba(255,255,255,0.03)',
+                color: isSelected ? '#fff' : isDisabled ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.6)',
+                fontSize: 14,
+                fontWeight: 600,
+                transition: 'all 0.25s ease',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                textAlign: 'left',
+                width: '100%',
+              }}
             >
-              {goal}
-            </motion.button>
-          ))}
-        </div>
+              <span>{goal}</span>
+              <span style={{
+                width: 22,
+                height: 22,
+                borderRadius: 6,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: isSelected ? '#6c63ff' : 'rgba(255,255,255,0.06)',
+                fontSize: 12,
+                transition: 'all 0.2s',
+              }}>
+                {isSelected ? '✓' : ''}
+              </span>
+            </button>
+          );
+        })}
+      </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/55 text-sm md:text-base">
-            {selectedGoals.length}/3 selected
-          </p>
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ delay: 0.3 }}
-            onClick={handleContinue}
-            disabled={selectedGoals.length === 0}
-            className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg inline-block"
-          >
-            Continue →
-          </motion.button>
-        </div>
-      </motion.div>
+      <div style={{ marginTop: 16, fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>
+        {selectedGoals.length}/3 selected
+      </div>
+
+      <button
+        onClick={handleContinue}
+        disabled={selectedGoals.length === 0}
+        style={{
+          marginTop: 20,
+          width: '100%',
+          padding: '15px',
+          fontSize: 15,
+          fontWeight: 700,
+          border: 'none',
+          borderRadius: 14,
+          background: selectedGoals.length > 0 ? 'linear-gradient(135deg, #6c63ff, #3b82f6)' : 'rgba(255,255,255,0.06)',
+          color: selectedGoals.length > 0 ? '#fff' : 'rgba(255,255,255,0.2)',
+          cursor: selectedGoals.length > 0 ? 'pointer' : 'default',
+          transition: 'all 0.25s',
+        }}
+      >
+        Continue →
+      </button>
     </div>
   );
 }
