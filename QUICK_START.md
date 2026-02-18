@@ -1,5 +1,7 @@
 # 🚀 Quick Start - Push to GitHub & Deploy
 
+> **✨ New!** The app now includes enhanced animations, full mobile responsiveness, plan history, print/PDF support, and share functionality! See [ENHANCEMENTS.md](ENHANCEMENTS.md) for details.
+
 ## Step 1: Create GitHub Repository
 
 1. Go to: **https://github.com/new**
