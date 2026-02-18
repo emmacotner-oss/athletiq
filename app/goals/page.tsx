@@ -90,7 +90,7 @@ export default function GoalsPage() {
             transition={{ delay: 0.3 }}
             onClick={handleContinue}
             disabled={selectedGoals.length === 0}
-            className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg w-full sm:w-auto"
+            className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg inline-block"
           >
             Continue →
           </motion.button>

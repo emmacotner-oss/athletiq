@@ -116,7 +116,7 @@ export default function SportPage() {
           transition={{ delay: 0.3 }}
           onClick={handleContinue}
           disabled={!canContinue}
-          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg w-full md:w-auto"
+          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg inline-block"
         >
           Continue →
         </motion.button>

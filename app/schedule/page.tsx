@@ -124,7 +124,7 @@ export default function SchedulePage() {
           transition={{ delay: 0.5 }}
           onClick={handleGenerate}
           disabled={!selectedExperience || isGenerating}
-          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-base md:text-lg w-full md:w-auto relative"
+          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-base md:text-lg inline-block relative"
           style={selectedExperience ? { boxShadow: '0 0 30px rgba(108, 99, 255, 0.5)' } : {}}
         >
           <span className="mr-2">⚡</span>

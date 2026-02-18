@@ -55,7 +55,7 @@ export default function Home() {
           whileTap={{ scale: 0.95 }}
           transition={{ delay: 0.8 }}
           onClick={() => router.push('/sport')}
-          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-base md:text-lg mb-12 w-full sm:w-auto"
+          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-base md:text-lg mb-12 inline-block"
         >
           Build My Plan →
         </motion.button>
