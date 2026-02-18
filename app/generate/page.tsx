@@ -48,7 +48,9 @@ export default function GeneratePage() {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to generate plan');
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          console.error('API Error:', errorData);
+          throw new Error(errorData.error || 'Failed to generate plan');
         }
 
         const plan: WorkoutPlan = await response.json();
@@ -58,8 +60,9 @@ export default function GeneratePage() {
         router.push('/results');
       } catch (err) {
         clearInterval(interval);
-        setError('Failed to generate workout plan. Please try again.');
-        console.error(err);
+        const errorMsg = err instanceof Error ? err.message : 'Failed to generate workout plan. Please try again.';
+        setError(errorMsg);
+        console.error('Generation error:', err);
       }
     };
 
