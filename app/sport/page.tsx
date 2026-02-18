@@ -57,7 +57,7 @@ export default function SportPage() {
   const canContinue = selectedSport && (selectedSport !== 'Other' || customInput.trim().length > 0);
 
   return (
-    <div className="min-h-screen p-4 py-12 max-w-5xl mx-auto">
+    <div className="min-h-screen p-4 py-8 md:py-12 max-w-5xl mx-auto">
       <BackButton />
       <ProgressBar step={1} />
 
@@ -66,17 +66,24 @@ export default function SportPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-12">What sport do you play?</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12">What sport do you play?</h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mb-8">
           {sports.map((s, index) => (
             <motion.button
               key={s}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.03 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ 
+                delay: index * 0.03,
+                type: 'spring',
+                stiffness: 300,
+                damping: 20
+              }}
               onClick={() => handleSportSelect(s)}
-              className={`card-glass p-6 rounded-xl text-center font-semibold transition-all hover:scale-105 ${
+              className={`card-glass p-4 md:p-6 rounded-xl text-center font-semibold text-sm md:text-base ${
                 selectedSport === s ? 'card-selected' : ''
               }`}
             >
@@ -104,6 +111,8 @@ export default function SportPage() {
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           transition={{ delay: 0.3 }}
           onClick={handleContinue}
           disabled={!canContinue}

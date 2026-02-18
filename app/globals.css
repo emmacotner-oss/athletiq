@@ -20,12 +20,16 @@ body {
   
   .btn-gradient {
     background: linear-gradient(135deg, #6c63ff 0%, #3b82f6 100%);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .btn-gradient:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+  .btn-gradient:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+  }
+  
+  .btn-gradient:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
   }
   
   .btn-gradient:disabled {
@@ -38,10 +42,66 @@ body {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-glass:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
   }
   
   .card-selected {
     background: rgba(108, 99, 255, 0.15);
     border-color: #6c63ff;
+  }
+  
+  .card-selected:hover {
+    background: rgba(108, 99, 255, 0.2);
+    border-color: #7c73ff;
+  }
+  
+  @keyframes spin-gradient {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .spinner-gradient {
+    animation: spin-gradient 1.5s linear infinite;
+  }
+
+  /* Responsive table for mobile */
+  @media (max-width: 640px) {
+    .exercise-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    body {
+      background: white;
+      color: black;
+    }
+
+    .text-gradient {
+      -webkit-text-fill-color: #6c63ff;
+      color: #6c63ff;
+    }
+
+    .card-glass {
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: none;
+    }
+
+    button {
+      display: none;
+    }
+
+    .no-print {
+      display: none;
+    }
   }
 }

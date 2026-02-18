@@ -39,7 +39,7 @@ export default function GoalsPage() {
   if (!sport) return null;
 
   return (
-    <div className="min-h-screen p-4 py-12 max-w-5xl mx-auto">
+    <div className="min-h-screen p-4 py-8 md:py-12 max-w-5xl mx-auto">
       <BackButton />
       <ProgressBar step={2} />
 
@@ -48,19 +48,26 @@ export default function GoalsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-4">What do you want to improve?</h1>
-        <p className="text-white/55 mb-8">Pick up to 3 focus areas</p>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">What do you want to improve?</h1>
+        <p className="text-white/55 mb-6 md:mb-8 text-sm md:text-base">Pick up to 3 focus areas</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-8">
           {availableGoals.map((goal, index) => (
             <motion.button
               key={goal}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.03 }}
+              whileHover={{ scale: selectedGoals.includes(goal) || selectedGoals.length < 3 ? 1.03 : 1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ 
+                delay: index * 0.03,
+                type: 'spring',
+                stiffness: 300,
+                damping: 20
+              }}
               onClick={() => handleGoalToggle(goal)}
               disabled={!selectedGoals.includes(goal) && selectedGoals.length >= 3}
-              className={`card-glass p-4 rounded-xl text-left font-semibold transition-all hover:scale-105 ${
+              className={`card-glass p-4 rounded-xl text-left font-semibold text-sm md:text-base ${
                 selectedGoals.includes(goal) ? 'card-selected' : ''
               } ${
                 !selectedGoals.includes(goal) && selectedGoals.length >= 3 ? 'opacity-30 cursor-not-allowed' : ''
@@ -71,17 +78,19 @@ export default function GoalsPage() {
           ))}
         </div>
 
-        <div className="flex items-center justify-between">
-          <p className="text-white/55">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/55 text-sm md:text-base">
             {selectedGoals.length}/3 selected
           </p>
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             transition={{ delay: 0.3 }}
             onClick={handleContinue}
             disabled={selectedGoals.length === 0}
-            className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg"
+            className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg w-full sm:w-auto"
           >
             Continue →
           </motion.button>

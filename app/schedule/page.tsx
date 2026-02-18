@@ -36,7 +36,7 @@ export default function SchedulePage() {
   const displaySport = sport === 'Other' ? customSport : sport;
 
   return (
-    <div className="min-h-screen p-4 py-12 max-w-5xl mx-auto">
+    <div className="min-h-screen p-4 py-8 md:py-12 max-w-5xl mx-auto">
       <BackButton />
       <ProgressBar step={3} />
 
@@ -45,21 +45,21 @@ export default function SchedulePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-12">Customize your plan</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12">Customize your plan</h1>
 
         {/* Days per week */}
-        <div className="mb-12">
-          <label className="block text-sm font-semibold uppercase tracking-wide text-white/55 mb-4">
+        <div className="mb-8 md:mb-12">
+          <label className="block text-xs md:text-sm font-semibold uppercase tracking-wide text-white/55 mb-4">
             Days per week
           </label>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 md:gap-4">
             {daysOptions.map((days) => (
               <motion.button
                 key={days}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedDays(days)}
-                className={`card-glass px-8 py-4 rounded-xl font-bold text-xl transition-all ${
+                className={`card-glass px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-lg md:text-xl ${
                   selectedDays === days ? 'card-selected' : ''
                 }`}
               >
@@ -70,8 +70,8 @@ export default function SchedulePage() {
         </div>
 
         {/* Experience level */}
-        <div className="mb-12">
-          <label className="block text-sm font-semibold uppercase tracking-wide text-white/55 mb-4">
+        <div className="mb-8 md:mb-12">
+          <label className="block text-xs md:text-sm font-semibold uppercase tracking-wide text-white/55 mb-4">
             Experience level
           </label>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -96,10 +96,10 @@ export default function SchedulePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="card-glass p-6 rounded-2xl mb-8"
+          className="card-glass p-4 md:p-6 rounded-2xl mb-6 md:mb-8"
         >
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/55 mb-4">Summary</h3>
-          <div className="space-y-2">
+          <h3 className="text-xs md:text-sm font-semibold uppercase tracking-wide text-white/55 mb-4">Summary</h3>
+          <div className="space-y-2 text-sm md:text-base">
             <p>
               <span className="text-white/55">Sport:</span>{' '}
               <span className="font-semibold">{displaySport}</span>
@@ -119,10 +119,12 @@ export default function SchedulePage() {
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           transition={{ delay: 0.5 }}
           onClick={handleGenerate}
           disabled={!selectedExperience || isGenerating}
-          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg w-full md:w-auto relative"
+          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-base md:text-lg w-full md:w-auto relative"
           style={selectedExperience ? { boxShadow: '0 0 30px rgba(108, 99, 255, 0.5)' } : {}}
         >
           <span className="mr-2">⚡</span>

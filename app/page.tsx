@@ -33,7 +33,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-5xl font-extrabold mb-6 text-gradient"
+          className="text-4xl md:text-5xl font-extrabold mb-6 text-gradient"
         >
           Train Smarter. Play Better.
         </motion.h1>
@@ -42,7 +42,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="text-lg mb-8"
+          className="text-base md:text-lg mb-8 px-4"
           style={{ color: 'rgba(255, 255, 255, 0.55)' }}
         >
           Get a personalized workout plan tailored to your sport, goals, and schedule — powered by AI.
@@ -51,9 +51,11 @@ export default function Home() {
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           transition={{ delay: 0.8 }}
           onClick={() => router.push('/sport')}
-          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-lg mb-12 inline-block"
+          className="btn-gradient px-8 py-4 rounded-xl font-semibold text-base md:text-lg mb-12 w-full sm:w-auto"
         >
           Build My Plan →
         </motion.button>
