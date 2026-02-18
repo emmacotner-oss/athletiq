@@ -9,7 +9,7 @@
 | Next.js 14 App Router | ✅ | Full implementation with TypeScript |
 | Tailwind CSS Dark Theme | ✅ | Custom gradient backgrounds, glass effects |
 | Framer Motion | ✅ | Comprehensive animations throughout |
-| OpenAI GPT-4 | ✅ | AI workout generation ready |
+| Google Gemini 1.5 Flash | ✅ | AI workout generation ready (FREE tier) |
 | 6 Complete Pages | ✅ | Landing, Sport, Goals, Schedule, Loading, Results |
 | Sport Selection (16 + custom) | ✅ | All sports with custom input |
 | Sport-Specific Goals | ✅ | Basketball, Soccer, Tennis, etc. each have tailored goals |
@@ -249,7 +249,7 @@ git push -u origin main
 1. Go to https://vercel.com
 2. Sign in with GitHub
 3. Import `athletiq` repository
-4. Add environment variable: `OPENAI_API_KEY`
+4. Add environment variable: `GEMINI_API_KEY` (get FREE at https://aistudio.google.com/app/apikey)
 5. Click "Deploy"
 
 ### Step 4: Get Live URL (1 minute)
@@ -391,7 +391,7 @@ This isn't a tutorial project - it's production-ready code with proper error han
 From the staggered card animations to the print-optimized styles, every detail was considered.
 
 ### Modern Stack
-Next.js 14, TypeScript, Tailwind, Framer Motion - all the latest best practices.
+Next.js 14, TypeScript, Tailwind, Framer Motion, Google Gemini AI (free tier) - all the latest best practices.
 
 ### Complete Documentation
 7 markdown files covering everything from quick start to detailed feature breakdowns.

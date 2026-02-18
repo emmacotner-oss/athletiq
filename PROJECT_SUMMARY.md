@@ -7,7 +7,7 @@ The AthletIQ website has been fully built and is ready for deployment!
 ## 📦 What Was Built
 
 ### Complete Next.js 14 Application
-- **Tech Stack:** Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, OpenAI GPT-4
+- **Tech Stack:** Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, Google Gemini AI
 - **Fully Responsive:** Mobile-first design that works on all devices
 - **Dark Theme:** Modern gradient design with glass-morphism effects
 - **AI Integration:** OpenAI GPT-4 for personalized workout plan generation
@@ -17,7 +17,7 @@ The AthletIQ website has been fully built and is ready for deployment!
 ```
 athletiq/
 ├── app/
-│   ├── api/generate-plan/route.ts    ✅ OpenAI API integration
+│   ├── api/generate-plan/route.ts    ✅ Gemini API integration
 │   ├── components/
 │   │   ├── BackButton.tsx            ✅ Navigation component
 │   │   └── ProgressBar.tsx           ✅ 3-step progress indicator
@@ -95,7 +95,7 @@ athletiq/
 
 #### ✅ API Integration
 - `/api/generate-plan` route
-- OpenAI GPT-4 integration
+- Google Gemini 1.5 Flash integration (FREE tier)
 - Structured JSON response
 - Error handling
 - System prompt with coaching expertise
@@ -116,7 +116,7 @@ All colors, typography, and component styles match specifications:
 - **TypeScript:** Type safety throughout
 - **Tailwind CSS:** Utility-first styling for rapid development
 - **Framer Motion:** Smooth, professional animations
-- **OpenAI SDK:** Official library for GPT-4 integration
+- **Google Gemini AI:** Free tier AI with fast response times
 - **React Context:** Simple state management for multi-step form
 
 ## 📊 Code Quality
@@ -156,13 +156,15 @@ Follow the instructions in **GITHUB_SETUP.md**:
 3. Add `OPENAI_API_KEY` environment variable
 4. Deploy!
 
-### 3. Get OpenAI API Key
+### 3. Get Gemini API Key (FREE)
 
 If you don't have one:
-1. Go to https://platform.openai.com/api-keys
-2. Create a new API key
-3. Add $5-10 credits to your OpenAI account
-4. Use this key in Vercel environment variables
+1. Go to https://aistudio.google.com/app/apikey
+2. Sign in with your Google account
+3. Click "Create API key"
+4. Copy the key - it's completely FREE!
+5. Use this key in Vercel environment variables
+6. Free tier includes 15 requests/min, 1500/day
 
 ### 4. Test Your Live Site
 

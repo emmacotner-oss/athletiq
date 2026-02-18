@@ -7,7 +7,7 @@ An AI-powered sports training planner that generates personalized workout plans 
 - 🏀 **16 Sports Supported** - Basketball, Soccer, Tennis, Swimming, Running, and more
 - 🎯 **Goal-Focused Training** - Pick up to 3 specific areas to improve
 - 📅 **Flexible Scheduling** - Choose 2-6 training days per week
-- 🤖 **AI-Powered Plans** - GPT-4 generates customized workout routines
+- 🤖 **AI-Powered Plans** - Google Gemini generates customized workout routines
 - 💪 **Experience Levels** - Beginner, Intermediate, or Advanced
 - 🎬 **Smooth Animations** - Professional Framer Motion transitions and interactions
 - 📱 **Fully Responsive** - Mobile-first design that works perfectly on all devices
@@ -21,7 +21,7 @@ An AI-powered sports training planner that generates personalized workout plans 
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **Animations:** Framer Motion
-- **AI:** OpenAI GPT-4
+- **AI:** Google Gemini 1.5 Flash (free tier)
 - **Deployment:** Vercel-ready
 
 ## Getting Started
@@ -29,7 +29,7 @@ An AI-powered sports training planner that generates personalized workout plans 
 ### Prerequisites
 
 - Node.js 18+ installed
-- An OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- A Google Gemini API key ([Get one free here](https://aistudio.google.com/app/apikey))
 
 ### Installation
 
@@ -49,9 +49,9 @@ npm install
 cp .env.example .env
 ```
 
-Then edit `.env` and add your OpenAI API key:
+Then edit `.env` and add your Gemini API key:
 ```
-OPENAI_API_KEY=your_actual_api_key_here
+GEMINI_API_KEY=your_actual_api_key_here
 ```
 
 4. Run the development server:
@@ -72,7 +72,7 @@ npm start
 
 1. Push your code to GitHub
 2. Import your repository on [Vercel](https://vercel.com)
-3. Add your `OPENAI_API_KEY` environment variable in the Vercel dashboard
+3. Add your `GEMINI_API_KEY` environment variable in the Vercel dashboard
 4. Deploy!
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/athletiq)
@@ -84,7 +84,7 @@ athletiq/
 ├── app/
 │   ├── api/
 │   │   └── generate-plan/
-│   │       └── route.ts          # OpenAI API integration
+│   │       └── route.ts          # Gemini API integration
 │   ├── components/
 │   │   ├── BackButton.tsx
 │   │   └── ProgressBar.tsx
@@ -116,7 +116,7 @@ athletiq/
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
+| `GEMINI_API_KEY` | Your Google Gemini API key (free tier available) | Yes |
 
 ## Features in Detail
 
@@ -153,7 +153,7 @@ MIT License - feel free to use this project for personal or commercial purposes.
 ## Acknowledgments
 
 - Built with [Next.js](https://nextjs.org/)
-- Powered by [OpenAI](https://openai.com/)
+- Powered by [Google Gemini AI](https://ai.google.dev/)
 - UI inspired by modern dark themes and sports training apps
 
 ---

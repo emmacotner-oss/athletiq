@@ -34,8 +34,8 @@ git push -u origin main
 5. Click **"Import"**
 6. Before deploying, add environment variable:
    - Click **"Environment Variables"**
-   - Name: `OPENAI_API_KEY`
-   - Value: Your OpenAI API key (get from https://platform.openai.com/api-keys)
+   - Name: `GEMINI_API_KEY`
+   - Value: Your Gemini API key (get free from https://aistudio.google.com/app/apikey)
    - Click **"Add"**
 7. Click **"Deploy"**
 
@@ -64,14 +64,14 @@ git branch -M main
 git push -u origin main
 ```
 
-## If You Don't Have an OpenAI API Key
+## If You Don't Have a Gemini API Key
 
-1. Go to: https://platform.openai.com/signup
-2. Sign up or log in
-3. Go to: https://platform.openai.com/api-keys
-4. Click **"Create new secret key"**
-5. Copy the key (starts with `sk-...`)
-6. Add $5-10 in credits: https://platform.openai.com/account/billing
+1. Go to: https://aistudio.google.com/app/apikey
+2. Sign in with your Google account
+3. Click **"Create API key"**
+4. Copy the key
+5. **It's FREE!** No credit card required
+6. Free tier includes 15 requests/minute, 1500 requests/day
 
 ---
 

@@ -35,7 +35,7 @@ Error: `turbo.createProject` is not supported by the wasm bindings.
    - Go to [vercel.com](https://vercel.com)
    - Click "Import Project"
    - Import your GitHub repository
-   - Add environment variable: `OPENAI_API_KEY=your_key_here`
+   - Add environment variable: `GEMINI_API_KEY=your_key_here`
    - Click "Deploy"
 
 ### Option 2: Deploy via Vercel CLI
@@ -51,8 +51,8 @@ vercel login
 vercel
 
 # Add environment variable
-vercel env add OPENAI_API_KEY
-# Enter your OpenAI API key when prompted
+vercel env add GEMINI_API_KEY
+# Enter your Gemini API key when prompted
 
 # Deploy to production
 vercel --prod
@@ -64,7 +64,7 @@ Before deploying, make sure you have:
 
 | Variable | Description | Where to Get It |
 |----------|-------------|-----------------|
-| `OPENAI_API_KEY` | Your OpenAI API key | https://platform.openai.com/api-keys |
+| `GEMINI_API_KEY` | Your Google Gemini API key (FREE) | https://aistudio.google.com/app/apikey |
 
 ## Alternative Deployment Platforms
 
@@ -93,16 +93,17 @@ Before deploying, make sure you have:
 
 - [ ] Verify the landing page loads
 - [ ] Test the full flow: Sport → Goals → Schedule → Generate
-- [ ] Check that AI generation works (requires valid OpenAI API key)
+- [ ] Check that AI generation works (requires valid Gemini API key - get free at https://aistudio.google.com/app/apikey)
 - [ ] Test on mobile devices
 - [ ] Verify all animations work smoothly
 
 ## Troubleshooting
 
 ### API Key Issues
-- Make sure your OpenAI API key is valid and has credits
+- Make sure your Gemini API key is valid (get free at https://aistudio.google.com/app/apikey)
 - Check that the environment variable is set correctly (no extra spaces)
 - Restart your deployment after adding environment variables
+- Gemini free tier: 15 requests/minute, 1500/day - no credit card needed
 
 ### Build Failures
 - Check Vercel/platform logs for specific errors
@@ -112,7 +113,7 @@ Before deploying, make sure you have:
 ### Runtime Errors
 - Check browser console for errors
 - Verify API routes are accessible
-- Check OpenAI API quota/limits
+- Check Gemini API quota (free tier is generous: 1500/day)
 
 ## Local Development Alternative
 
@@ -134,7 +135,7 @@ Your deployment is successful when:
 - ✅ Landing page loads with animations
 - ✅ All navigation works
 - ✅ Sport and goal selection works
-- ✅ AI generates a workout plan (may take 5-10 seconds)
+- ✅ AI generates a workout plan (Gemini is fast - usually 2-5 seconds)
 - ✅ Results display correctly with all workout details
 
 ---

@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 const systemPrompt = `You are a certified sports performance coach and strength & conditioning specialist. Generate a detailed, structured weekly workout plan based on the user's inputs.
 
@@ -52,9 +50,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!process.env.OPENAI_API_KEY) {
+    if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured' },
+        { error: 'Gemini API key not configured' },
         { status: 500 }
       );
     }
@@ -65,22 +63,28 @@ export async function POST(request: NextRequest) {
 - Days per week: ${daysPerWeek}
 - Experience level: ${experience}`;
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userMessage },
-      ],
-      temperature: 0.7,
-    });
+    const fullPrompt = `${systemPrompt}\n\n${userMessage}`;
 
-    const responseText = completion.choices[0].message.content;
-    if (!responseText) {
-      throw new Error('No response from OpenAI');
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    
+    const result = await model.generateContent(fullPrompt);
+    const response = await result.response;
+    const text = response.text();
+
+    if (!text) {
+      throw new Error('No response from Gemini');
+    }
+
+    // Clean up the response - remove markdown code blocks if present
+    let cleanedText = text.trim();
+    if (cleanedText.startsWith('```json')) {
+      cleanedText = cleanedText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+    } else if (cleanedText.startsWith('```')) {
+      cleanedText = cleanedText.replace(/```\n?/g, '');
     }
 
     // Parse the JSON response
-    const plan = JSON.parse(responseText);
+    const plan = JSON.parse(cleanedText);
 
     return NextResponse.json(plan);
   } catch (error) {

@@ -48,8 +48,8 @@ Now that your code is on GitHub:
    - Build Command: `npm run build` (default)
    - Output Directory: `.next` (default)
 6. **Add Environment Variable:**
-   - Key: `OPENAI_API_KEY`
-   - Value: Your OpenAI API key (get one at https://platform.openai.com/api-keys)
+   - Key: `GEMINI_API_KEY`
+   - Value: Your Gemini API key (get FREE at https://aistudio.google.com/app/apikey)
 7. Click **"Deploy"**
 
 Deployment takes 1-2 minutes. Once done, Vercel will give you a live URL like:
@@ -60,7 +60,7 @@ Deployment takes 1-2 minutes. Once done, Vercel will give you a live URL like:
 Visit your Vercel URL and test:
 - Landing page loads with animations ✅
 - Click through Sport → Goals → Schedule ✅
-- Generate a workout plan (requires valid OpenAI key) ✅
+- Generate a workout plan (requires valid Gemini key - FREE at https://aistudio.google.com/app/apikey) ✅
 - Verify the workout plan displays correctly ✅
 
 ## Alternative: Use GitHub CLI (if installed)
@@ -84,13 +84,13 @@ This creates the repo and pushes in one command!
 
 ### Issue: Build fails on Vercel
 **Solution:** Check the Vercel build logs. Common causes:
-- Missing `OPENAI_API_KEY` environment variable
+- Missing `GEMINI_API_KEY` environment variable
 - Make sure you added the key in Vercel dashboard, not just locally
 
 ### Issue: AI generation doesn't work
 **Solution:** 
-- Verify your OpenAI API key is valid
-- Check you have credits on your OpenAI account
+- Verify your Gemini API key is valid
+- Gemini free tier is generous (1500 requests/day) - no credit card needed
 - Look at Vercel function logs for specific errors
 
 ## Next Steps After Deployment

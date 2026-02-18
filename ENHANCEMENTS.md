@@ -148,7 +148,7 @@ All the additional requirements have been successfully implemented! The app now 
 - [x] 6 pages with smooth routing
 - [x] 16 sports + custom option
 - [x] Sport-specific goals
-- [x] AI workout generation (GPT-4)
+- [x] AI workout generation (Google Gemini 1.5 Flash - FREE tier)
 - [x] Beautiful dark theme
 - [x] Fully responsive
 
