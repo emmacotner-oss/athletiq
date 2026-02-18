@@ -9,6 +9,11 @@ An AI-powered sports training planner that generates personalized workout plans 
 - 📅 **Flexible Scheduling** - Choose 2-6 training days per week
 - 🤖 **AI-Powered Plans** - GPT-4 generates customized workout routines
 - 💪 **Experience Levels** - Beginner, Intermediate, or Advanced
+- 🎬 **Smooth Animations** - Professional Framer Motion transitions and interactions
+- 📱 **Fully Responsive** - Mobile-first design that works perfectly on all devices
+- 💾 **Plan History** - Automatically saves your last 5 workout plans
+- 🖨️ **Print/PDF Export** - Save your plan as a PDF with optimized print styles
+- 🔗 **Share Functionality** - Share your plan via native share or copy link
 
 ## Tech Stack
 
